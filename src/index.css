@@ -1,0 +1,37 @@
+@import "tailwindcss";
+
+* {
+  box-sizing: border-box;
+}
+
+.container {
+  padding-left: 16px;
+  padding-right: 16px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.fade-edges {
+  position: relative;
+  overflow: hidden;
+}
+
+.fade-edges::before,
+.fade-edges::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 100px;
+  height: 100%;
+  z-index: 2;
+}
+
+.fade-edges::before {
+  left: 0;
+  background: linear-gradient(to right, #ececec 0%, transparent 100%);
+}
+
+.fade-edges::after {
+  right: 0;
+  background: linear-gradient(to left, #ececec 0%, transparent 100%);
+}
