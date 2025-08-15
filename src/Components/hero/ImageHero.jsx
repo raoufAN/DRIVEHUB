@@ -1,34 +1,45 @@
 /* eslint-disable no-unused-vars */
 import { motion, useAnimation } from "framer-motion";
 import { useEffect, useState } from "react";
+import image1 from "../../assets/hero.avif";
+import image2 from "../../assets/hero1.avif";
+import image3 from "../../assets/hero2.jpg";
 
 const listImages = [
-  { id: 1, image: "/hero.avif" },
-  { id: 2, image: "/hero1.avif" },
-  { id: 3, image: "/hero2.jpg" },
+  { id: 1, image: image1 },
+  { id: 2, image: image2 },
+  { id: 3, image: image3 },
 ];
 
-const ImageHero = () => {
+const ImageHero = ({ isInView }) => {
   const [activeSpan, setActiveSpan] = useState(1);
   const controls = useAnimation();
   const controls2 = useAnimation();
   useEffect(() => {
-    async function sequence() {
-      // First animate position and opacity
-      await controls.start({
-        scale: 1,
-        transition: { duration: 1 },
-      });
+    if (isInView) {
+      async function sequence() {
+        // First animate position and opacity
+        await controls.start({
+          scale: 1,
+          transition: { duration: 1 },
+        });
 
-      // Then animate the image inside after scale animation is done
-      await controls2.start({
-        scale: 1,
-        transition: { duration: 1 },
+        // Then animate the image inside after scale animation is done
+        await controls2.start({
+          scale: 1,
+          transition: { duration: 1 },
+        });
+      }
+      sequence();
+    } else {
+      controls.start({
+        scale: 0,
+      });
+      controls2.start({
+        scale: 1.1,
       });
     }
-
-    sequence();
-  }, [controls, controls2]);
+  }, [controls, controls2, isInView]);
   return (
     <>
       <motion.div

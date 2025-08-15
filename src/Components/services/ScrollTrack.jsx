@@ -1,16 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { motion, useAnimation } from "framer-motion";
 import { useEffect, useRef } from "react";
-
-const logos = [
-  "/carlogo2.png",
-  "/carlogo.png",
-  "/carlogo3.png",
-  "/carLogo4.png",
-  "/carlogo5.png",
-  "/carlogo6.png",
-  "/carlogo7.png",
-];
+import { logos } from "../../data/data";
 
 function ScrollTrack() {
   const controls = useAnimation();
@@ -23,7 +14,7 @@ function ScrollTrack() {
       while (true) {
         await controls.start({
           x: -firstHalfWidth,
-          transition: { duration: 20, ease: "linear" },
+          transition: { duration: 15, ease: "linear" },
         });
         controls.set({ x: 0 }); // instant reset
       }

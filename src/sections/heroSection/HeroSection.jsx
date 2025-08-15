@@ -5,7 +5,7 @@ const HeroSection = () => {
   return (
     <section className="w-full pt-5 overflow-hidden h-fit snap-center">
       <div className="container">
-        <Header />
+        <Header side="bottom" />
         <Hero />
       </div>
     </section>

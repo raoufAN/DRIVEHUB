@@ -2,6 +2,8 @@ import { useState } from "react";
 /* eslint-disable no-unused-vars */
 import { AnimatePresence, motion } from "motion/react";
 import { IoMenu } from "react-icons/io5";
+import Logo from "../../assets/logo.png";
+import showAndHideAnimationMenu from "../../data/data";
 
 const linksList = ["Home", "Services", "About Us", "Benefits", "Our Solutions"];
 
@@ -33,7 +35,7 @@ const logoVariants = {
   },
 };
 
-const Header = () => {
+const Header = ({ side }) => {
   const [activeLink, setActiveLink] = useState("Home");
   const [MenuisOpen, setMenuIsOpen] = useState(false);
   return (
@@ -44,7 +46,7 @@ const Header = () => {
       initial="initial">
       <div className="flex items-center gap-2.5 cursor-pointer">
         <motion.img
-          src="/logo.png"
+          src={Logo}
           alt="logo"
           className="w-7 md:w-10"
           variants={logoVariants}
@@ -78,11 +80,15 @@ const Header = () => {
       <AnimatePresence>
         {MenuisOpen && (
           <motion.ul
-            initial={{ top: -10, right: 10, scaleX: 0, scaleY: 0, opacity: 0 }}
-            animate={{ top: 70, right: 0, scaleX: 1, scaleY: 1, opacity: 1 }}
-            exit={{ top: 10, right: 10, scaleX: 0, scaleY: 0, opacity: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            style={{ position: "absolute", left: 0, transformOrigin: "top right" }}
+            initial={showAndHideAnimationMenu.initial}
+            animate={
+              side === "top"
+                ? showAndHideAnimationMenu.animateTop
+                : showAndHideAnimationMenu.animateBottom
+            }
+            exit={showAndHideAnimationMenu.exit}
+            transition={showAndHideAnimationMenu.transition}
+            style={showAndHideAnimationMenu.style}
             className="absolute z-50 flex flex-col items-center justify-center gap-5 px-5 py-10 bg-white shadow-lg lg:hidden rounded-xl">
             {linksList.map((link) => (
               <li
